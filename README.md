@@ -27,16 +27,21 @@ All projects will require the following:
 ## Phase 0: Force Selection, Analysis & Plan
 ---------- 
 
-#### Custom Force: NAME OF YOUR FORCE
+#### Custom Force: Megalophobia
 
 ### Custom Force Formula
 What is the formula for your force? Including descriptions/definitions for the symbols. (You may include a picture of the formula if it is not easily typed.)
-
-YOUR ANSWER HERE
+f = log(s_a - s_b)/d * ab
+f is the force exerted on orb b
+s_a is the bsize of orb a
+s_b is the bsize of orb b
+d is the distance between orb a and orb b
+ab is the normalized vector between orb a and orb b
 
 ### Custom Force Breakdown
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
-  - YOUR ANSWER HERE
+  - This force uses the x and y values stored within the PVector called center
+  - This force uses the bsize value
 
 - Does this force require any new constants, if so what are they and what values will you try initially?
   - YOUR ANSWER HERE
