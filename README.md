@@ -30,7 +30,7 @@ All projects will require the following:
 
 ### Custom Force Formula
 What is the formula for your force? Including descriptions/definitions for the symbols. (You may include a picture of the formula if it is not easily typed.)
-f = log(s_a - s_b)/d * ab
+f = log(s_a - s_b)/d * ab * p
 f is the force exerted on orb b
 s_a is the bsize of orb a
 s_b is the bsize of orb b
@@ -39,51 +39,53 @@ ab is the normalized vector between orb a and orb b
 
 ### Custom Force Breakdown
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
-  - This force uses the x and y values stored within the PVector called center
-  - This force uses the bsize value
+  - The PVector center
+  - The bsize values
 
 - Does this force require any new constants, if so what are they and what values will you try initially?
-  - YOUR ANSWER HERE
+  - Possibly, a scaling constant may be needed to keep the force stable and prevent extreme values, log may prevent some extreme values so k will equal 1 initially until tuning is necessary.
 
 - Does this force require any new information to be added to the `Orb` class? If so, what is it and what data type will you use?
-  - YOUR ANSWER HERE
+  - All necessary values are in Orb already or can be calculated using values in Orb
 
 - Does this force interact with other `Orbs`, or is it applied based on the environment?
-  - YOUR ANSWER HERE
+  - This force interacts with other orbs. Orb b feels a force based on the size difference between orb a and orb b.
 
 - In order to calculate this force, do you need to perform extra intermediary calculations? If so, what?
-  - YOUR ANSWER HERE
+  - Yes, compute distance between orb centers, compute normalized direction vector, and compute s_a - s_b
 
 --- 
 
 ### Simulation 1: Gravity
 Describe how you will attempt to simulate orbital motion.
 
+A large orb stays near the center while a smaller orb moves around it. Gravity pulls the smaller orb inward, creating an orbit‑like path.
+
 --- 
 
 ### Simulation 2: Spring
 Describe what your spring simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+Two orbs are connected by a spring with a chosen rest length. Both orbs start slightly away from that rest length. The spring pulls the orbs toward the rest length. They overshoot, bounce back, and continue oscillating. 
 
 --- 
 
 ### Simulation 3: Drag
 Describe what your drag simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+An orb begins with some initial velocity. A drag force is applied that should always oppose the direction of motion. The orb slows down over time. Its movement becomes smaller and smaller until it eventually comes to a stop as drag removes its energy.
 
 --- 
 
 ### Simulation 4: Custom force
-Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running.
+Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running. 
 
-YOUR ANSWER HERE
+A large orb and a smaller orb are placed in the space. The custom force uses the size difference and distance between them to calculate a repelling effect. The smaller orb moves away from the larger one. A bigger size difference creates a stronger push, causing the small orb to flee more dramatically, while the large orb moves towards it.
 
 --- 
 
 ### Simulation 5: Combination
 Describe what your combination simulation will look like. Explain how it will be setup, and how it should behave while running.
 
-YOUR ANSWER HERE
+Multiple orbs are placed in the space, and all forces are active at the same time. Because all forces act on all orbs simultaneously, the motion is complicated. Orbs curve when they’re orbiting, bounce by springs, slow down from drag, and move away from the nearest larger orb due to the megalophobia force.
 
