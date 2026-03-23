@@ -30,20 +30,20 @@ All projects will require the following:
 
 ### Custom Force Formula
 What is the formula for your force? Including descriptions/definitions for the symbols. (You may include a picture of the formula if it is not easily typed.)
-f = log(s_a - s_b)/d * ab * p
+f = s_a - s_b/d * ab * p
 f is the force exerted on orb b
 s_a is the bsize of orb a
 s_b is the bsize of orb b
 d is the distance between orb a and orb b
 ab is the normalized vector between orb a and orb b
-
+p is a constant that will be used to change the magnitude of the force, it will be 2, and then for each orb that exists, 0.1 will be subtracted from it
 ### Custom Force Breakdown
 - What information that is already present in the `Orb` or `OrbNode` classes does this force use?
   - The PVector center
   - The bsize values
 
 - Does this force require any new constants, if so what are they and what values will you try initially?
-  - Possibly, a scaling constant may be needed to keep the force stable and prevent extreme values, log may prevent some extreme values so k will equal 1 initially until tuning is necessary.
+  - Possibly, a scaling constant may be needed to keep the force stable and prevent extreme values, it will depend on the number of orbs currently present, scaling down, as orbs are removed.
 
 - Does this force require any new information to be added to the `Orb` class? If so, what is it and what data type will you use?
   - All necessary values are in Orb already or can be calculated using values in Orb
@@ -80,7 +80,7 @@ An orb begins with some initial velocity. A drag force is applied that should al
 ### Simulation 4: Custom force
 Describe what your Custom force simulation will look like. Explain how it will be setup, and how it should behave while running. 
 
-A large orb and a smaller orb are placed in the space. The custom force uses the size difference and distance between them to calculate a repelling effect. The smaller orb moves away from the larger one. A bigger size difference creates a stronger push, causing the small orb to flee more dramatically, while the large orb moves towards it.
+A large orb and a smaller orb are placed in the space. The custom force uses the size difference and distance between them to calculate a repelling effect. The smaller orb moves away from the larger one. A bigger size difference creates a stronger push, causing the small orb to flee more dramatically. Aditionally, when 2 orbs completely overlap, the smaller orb will be removed and the size and mass will be added to the larger orb. The fixed orb will not be affected by this.
 
 --- 
 
