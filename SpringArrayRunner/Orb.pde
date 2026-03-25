@@ -122,11 +122,13 @@ class Orb
    */
   PVector getSpring(Orb other, int springLength, float springK)
   {
-    PVector direction = new PVector(abs(other.center.x-this.center.x)-springLength, abs(other.center.y-this.center.y)-springLength);
-    direction.normalize();
-    float magnitude = abs(springK*PVector.dist(other.center, this.center));
-    return direction.mult(magnitude);
-  }//getSpring
+  PVector direction = PVector.sub(other.center, this.center);
+  float distance = direction.mag();
+  float displacement = distance - springLength;
+  direction.normalize();
+  direction.mult(springK * displacement);
+  return direction;
+}//getSpring
 
   // Applies the custom "megalophobia" force between two orbs.
   // Larger orbs push smaller ones away, smaller orbs feel weaker force.
