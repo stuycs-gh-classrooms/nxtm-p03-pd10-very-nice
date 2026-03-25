@@ -71,13 +71,15 @@ void draw()
   //draw the orbs and springs
   for (int o=0; o < orbCount; o++) {
     orbs[o].display();
+}//draw orbs 
     for (int i = 1; i < orbCount; i++) {
-      drawSpring(orbs[o], orbs[i]);
-    }
+  drawSpring(orbs[i-1], orbs[i]);
+}
+    
 
     //Part 1: write drawSpring below
     //Use drawspring correctly to draw springs
-  }//draw orbs & springs
+  
 
   if (toggles[MOVING]) {
     //Part 2: write applySprings below
@@ -96,6 +98,9 @@ void draw()
       if (toggles[GRAVITY]) {
         orbs[o].applyForce(orbs[o].getGravity(orbs[0], G_CONSTANT));
       }
+      if (toggles[DRAGF]) {
+        orbs[o].applyForce(orbs[o].getDragForce(D_COEF));
+    }
     }//gravity, drag
 
     for (int o=0; o < orbCount; o++) {
@@ -184,12 +189,11 @@ void drawSpring(Orb o0, Orb o1)
  neighboring orbs in the array.
  */
 void applySprings()
-{
-  for (int o=0; o < orbCount; o++) {
-    for (int i = 1; i < orbCount; i++) {
-      orbs[o].applyForce(orbs[o].getSpring(orbs[i], SPRING_LENGTH, SPRING_K));
-    }
-  }
+for (int i = 1; i < orbCount; i++) {
+  PVector force = orbs[i].getSpring(orbs[i-1], SPRING_LENGTH, SPRING_K);
+  orbs[i].applyForce(force);
+  orbs[i-1].applyForce(force.mult(-1));
+}
 }//applySprings
 
 
