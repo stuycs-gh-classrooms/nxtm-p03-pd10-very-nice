@@ -63,9 +63,8 @@ class Orb
 
 
   /**
-   YOUR CONCISE+CLEAR DESCRIPTION OF WHAT THIS METHOD DOES
-   and/or
-   WHY IT EXISTS
+   Adds a force to the orb by converting it into acceleration (F = ma).
+   This lets other forces like gravity, drag, etc. affect motion.
    */
   void applyForce(PVector force)
   {
@@ -76,9 +75,7 @@ class Orb
 
 
   /**
-   YOUR CONCISE+CLEAR DESCRIPTION OF WHAT THIS METHOD DOES
-   and/or
-   WHY IT EXISTS
+   Calculates air resistance (drag), which always pushes opposite the velocity.
    */
   PVector getDragForce(float cd)
   {
@@ -92,9 +89,7 @@ class Orb
 
 
   /**
-   YOUR CONCISE+CLEAR DESCRIPTION OF WHAT THIS METHOD DOES
-   and/or
-   WHY IT EXISTS
+   Calculates the gravitational pull from another orb and attracts this orb toward the other orb.
    */
   PVector getGravity(Orb other, float G)
   {
@@ -132,6 +127,10 @@ class Orb
     float magnitude = abs(springK*PVector.dist(other.center, this.center));
     return direction.mult(magnitude);
   }//getSpring
+
+  // Applies the custom "megalophobia" force between two orbs.
+  // Larger orbs push smaller ones away, smaller orbs feel weaker force.
+  // The force depends on size difference and distance between the orbs.
   void applyMegalophobiaPair(Orb other, int totalOrbs, float baseP) {
     PVector sd = new PVector();
     sd.set(other.center);
@@ -141,7 +140,7 @@ class Orb
       return;
     }
     sd.normalize();
-    sd.mult(((bsize - other.bsize) / d) * max(0, baseP - 0.1f * totalOrbs));
+    sd.mult(((bsize - other.bsize) / d) * max(0, baseP - 0.1 * totalOrbs));
     applyForce(sd);
     other.applyForce(sd);
     println(other.acceleration);
